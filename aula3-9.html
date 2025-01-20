@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trabalhando com o Console</title>
+  <script>
+    // Mensagens básicas
+    console.log("Iniciando o script...");
+    console.info("Informação inicial do sistema.");
+    console.warn("Isso é apenas um aviso. Verifique se está tudo certo.");
+
+    // Exibindo um objeto no console
+    const produto = {
+      nome: "Smartphone",
+      preco: 1999.99,
+      estoque: 20
+    };
+    console.log("Produto:", produto);
+    console.table([produto]); // Exibindo como tabela
+
+    // Grupo de logs
+    console.group("Detalhes do Produto");
+    console.log("Nome:", produto.nome);
+    console.log("Preço:", produto.preco);
+    console.log("Estoque:", produto.estoque);
+    console.groupEnd();
+
+    // Função com logs de debug
+    function realizarCompra(qtde) {
+      console.log("Tentando realizar compra de", qtde, "unidades...");
+      if (qtde > produto.estoque) {
+        console.error("Erro: Quantidade solicitada maior do que o estoque disponível!");
+      } else {
+        produto.estoque -= qtde;
+        console.log(`Compra realizada com sucesso! Estoque atual: ${produto.estoque}`);
+      }
+    }
+
+    // Testando função
+    realizarCompra(5);
+    realizarCompra(20); // Deve gerar erro
+
+  </script>
+</head>
+<body>
+  <h1>Aula 3.9: Trabalhando com o Console</h1>
+  <p>Abra o console para ver as mensagens.</p>
+
+  
+</body>
+</html>

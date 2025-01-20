@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Queries</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        /* Estilos globais */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header, footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilo para telas menores que 768px */
+@media (max-width: 768px) {
+    body {
+        background-color: lightblue;
+    }
+
+    header, footer {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    main {
+        font-size: 16px;
+    }
+}
+
+/* Estilo para telas entre 769px e 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    body {
+        background-color: lightgreen;
+    }
+
+    header, footer {
+        font-size: 18px;
+    }
+
+    main {
+        font-size: 20px;
+    }
+}
+
+/* Estilo para telas maiores que 1024px */
+@media (min-width: 1025px) {
+    body {
+        background-color: white;
+    }
+
+    header, footer {
+        font-size: 20px;
+    }
+
+    main {
+        font-size: 22px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo ao Site Responsivo</h1>
+    </header>
+    <main>
+        <p>Este site ajusta seu layout de acordo com o tamanho da tela.</p>
+    </main>
+    <footer>
+        <p>Desenvolvido com CSS Responsivo</p>
+    </footer>
+</body>
+</html>
