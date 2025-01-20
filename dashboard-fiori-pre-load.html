@@ -54,6 +54,8 @@
         height: 9rem;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         transition: all var(--transition-speed);
+        text-decoration: none;
+        color: var(--text-light);
       }
 
       .card:hover {
@@ -94,8 +96,20 @@
         position: absolute;
         top: 1rem;
         right: 1rem;
+        border: none;
+        color: black;
+        background-color: transparent;
+        font-size: large;
+        cursor: pointer;
+      }
+
+      body.dark-mode .theme-toggle {
+        color: white;
       }
     </style>
+
+    <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+
     <script>
       // Propriedades Básicas
       const pageTitle = "Título";
@@ -112,13 +126,21 @@
               subTitle: "Pendências",
               icon: "📊",
               value: "1,15 K",
+              event: "CT-ZALGO",
             },
-            { title: "Transação B", subTitle: "Alertas", icon: "", value: "" },
+            {
+              title: "Transação B",
+              subTitle: "Alertas",
+              icon: "",
+              value: "",
+              event: "CT-ZALGO",
+            },
             {
               title: "Transação C",
               subTitle: "Monitoramento",
               icon: "",
               value: "",
+              event: "CT-ZALGO",
             },
           ],
         },
@@ -134,14 +156,14 @@
         areasCards.forEach((area) => {
           let cardsHtml = "";
           area.items.forEach((card) => {
-            cardsHtml += `<div class="card">
+            cardsHtml += `<a class="card" href="SAPEVENT:${card.event}">
                 <h3>${card.title}</h3>
                 <p>${card.subTitle}</p>
                 <div class="card-data">
                   <span class="data-icon">${card.icon}</span>
                   <span class="data-value">${card.value}</span>
                 </div>
-              </div>`;
+              </a>`;
           });
 
           areasHtml += `<section class="area">
@@ -160,16 +182,18 @@
           .getElementsByTagName("body")[0]
           .className.match(/dark-mode/);
         if (isDark) {
-          buttonTheme[0].innerHTML = "L";
+          buttonTheme[0].innerHTML = `<i class="lni lni-sun-1"></i>`;
         } else {
-          buttonTheme[0].innerHTML = "D";
+          buttonTheme[0].innerHTML = `<i class="lni lni-moon-half-right-5"></i>`;
         }
       }
     </script>
   </head>
   <body>
     <div class="dashboard relative">
-      <button class="theme-toggle" onclick="toggleTheme()">D</button>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="lni lni-moon-half-right-5"></i>
+      </button>
 
       <header class="header">
         <h1 id="header-title"></h1>
