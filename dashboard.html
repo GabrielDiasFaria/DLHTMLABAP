@@ -1,0 +1,195 @@
+<html>
+  <head>
+    <style>
+      :root {
+        --background-dark: #121212;
+        --card-dark: #1e1e1e;
+        --text-dark: #ffffff;
+        --subtext-dark: #b0b0b0;
+
+        --background-light: #f3f3f3;
+        --card-light: #ffffff;
+        --text-light: #121212;
+        --subtext-light: #5a5a5a;
+
+        --primary-font: Arial, sans-serif;
+        --transition-speed: 0.2s;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--primary-font);
+        background-color: var(--background-light);
+        color: var(--text-light);
+        transition: all var(--transition-speed);
+      }
+
+      .dashboard {
+        padding: 1rem;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      section {
+        /* background-color: red; */
+      }
+
+      #cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      #card {
+        background-color: var(--card-light);
+        padding: 1rem;
+        border-radius: 1rem;
+        width: 15rem;
+        height: 8rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: all var(--transition-speed);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      #card:hover {
+        transform: scale(1.03);
+        cursor: pointer;
+      }
+
+      #card h3 {
+        margin: 0 0 10px;
+        color: var(--text-light);
+      }
+
+      #card p {
+        margin: 0 0 10px;
+        color: var(--subtext-light);
+      }
+
+      #card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.2rem;
+        width: 100%;
+      }
+
+      body.dark-mode {
+        background-color: var(--background-dark);
+        color: var(--text-dark);
+      }
+
+      body.dark-mode #card {
+        background-color: var(--card-dark);
+        color: var(--text-dark);
+      }
+
+      body.dark-mode #card h3 {
+        background-color: var(--card-dark);
+        color: var(--text-dark);
+      }
+
+      .theme-toggle {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        border: none;
+        background-color: transparent;
+        font-size: large;
+        cursor: pointer;
+      }
+
+      body.dark-mode .theme-toggle {
+        color: var(--text-dark);
+      }
+    </style>
+
+    <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet" />
+
+    <script>
+      const sections = [
+        {
+          title: "Título 1",
+          cads: [
+            {
+              title: "FB03",
+              subtitle: "Consultar Doc FI",
+              icon: "search-1",
+              value: "",
+            },
+          ],
+        },
+        {
+          title: "Título 2",
+          cads: [
+            {
+              title: "VA01",
+              subtitle: "Consultar Ordem",
+              icon: "search-1",
+              value: "1700,00",
+            },
+          ],
+        },
+      ];
+
+      addEventListener("load", (event) => {
+        document.getElementById("header-title").innerHTML = "Título";
+        document.getElementById("header-subtitle").innerHTML = "SubTítulo";
+
+        let contentSections = document.getElementById("content-sections");
+
+        sections.forEach((section) => {
+          contentSections.innerHTML += `<section>
+                                          <h2>${section.title}</h2>
+                                          <div id="cards">
+                                            ${section.cads.map((card) => {
+                                              return `<div id="card">
+                                                        <div id="card-content">                                                         
+                                                          <h3>${card.title}</h3>
+                                                          <h4>${card.subtitle}</h4>
+                                                        </div>
+                                                        <div id="card-footer">
+                                                          <span><i class="lni lni-${card.icon}"></i></span>
+                                                          <span>${card.value}</span>
+                                                        </div>
+                                                      </div>`;
+                                            })}
+                                          </div>
+                                        </section>`;
+        });
+      });
+
+      function toggleTheme() {
+        const buttonTheme = document.getElementsByClassName("theme-toggle");
+        const isDark = document.body.classList.toggle("dark-mode")
+          ? true
+          : false;
+        if (isDark) {
+          buttonTheme[0].innerHTML = `<i class="lni lni-sun-1"></i>`;
+        } else {
+          buttonTheme[0].innerHTML = `<i class="lni lni-moon-half-right-5"></i>`;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="dashboard relative">
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="lni lni-moon-half-right-5"></i>
+      </button>
+      <header class="header">
+        <h1 id="header-title"></h1>
+        <h3 id="header-subtitle"></h3>
+      </header>
+
+      <content id="content-sections"> </content>
+    </div>
+  </body>
+</html>
