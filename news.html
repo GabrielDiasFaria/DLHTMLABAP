@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Últimas Notícias sobre SAP</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+      .email-content {
+        background-color: #1d1b28;
+        padding: 20px;
+        margin: 1rem;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 600px;
+        text-align: center;
+      }
+      .news-card {
+        background-color: #2c2a3a;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        text-align: left;
+      }
+      .news-card img {
+        border-radius: 10px;
+        width: 100%;
+      }
+      .news-card h3 a {
+        color: #00d0ff;
+        text-decoration: none;
+        font-size: 18px;
+      }
+      .news-card p {
+        color: #cccccc;
+        font-size: 14px;
+        margin: 5px 0;
+      }
+      .news-card .date {
+        color: #bbbbbb;
+        font-size: 12px;
+      }
+      .news-card .read-more {
+        display: inline-block;
+        background-color: #00d0ff;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <table class="email-content">
+        <tr>
+          <td>
+            <img
+              src="https://www.descomplicandolinguagens.com.br/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FLogoNewDL.fabc9766.png&w=128&q=75"
+              alt="Descomplicando Linguagens"
+              width="150"
+              style="margin-bottom: 20px"
+            />
+            <h2 style="color: white">📢 Últimas Notícias sobre SAP</h2>
+            <p style="color: white; font-size: 16px">
+              Aqui estão algumas das principais notícias da semana sobre SAP!
+            </p>
+
+            <!-- Aqui os cards serão inseridos via JS -->
+            <div id="news-container"></div>
+
+            <p style="color: white; font-size: 16px; font-weight: bold">
+              Fique atualizado com as novidades da SAP e continue aprendendo!
+            </p>
+
+            <p style="color: #999999; font-size: 12px; text-align: center">
+              © 2024 Descomplicando Linguagens | Todos os direitos reservados.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      // Array de notícias vindo do N8N
+      const newsArray = [
+        "Accelerating AI-Driven Business Transformation with SAP Preferred Success\n[https://news.sap.com/wp-content/blogs.dir/1/files/2023/12/05/300247_GettyImages-1346136999_medium_uncropped_F-540x310.jpg]https://news.sap.com/2025/02/business-transformation-sap-preferred-success-ai-workshop/\nFeature [https://news.sap.com/features/]\n\n\nACCELERATING AI-DRIVEN BUSINESS TRANSFORMATION WITH SAP PREFERRED SUCCESS\n\n[https://news.sap.com/2025/02/business-transformation-sap-preferred-success-ai-workshop/]\nby Kiron Satyavarapu [https://news.sap.com/author/kironsatyavarapu/]\nFebruary 20, 2025",
+        "Driving Efficiency and Compliance: Capgemini’s Journey with SAP Fieldglass\n[https://news.sap.com/wp-content/blogs.dir/1/files/2025/02/19/276693_276693_l_srgb_s_gl_uncropped_F-540x310.jpg]https://news.sap.com/2025/02/driving-efficiency-compliance-capgemini-sap-fieldglass/\nFeature [https://news.sap.com/features/]\n\n\nDRIVING EFFICIENCY AND COMPLIANCE: CAPGEMINI’S JOURNEY WITH SAP FIELDGLASS\n\n[https://news.sap.com/2025/02/driving-efficiency-compliance-capgemini-sap-fieldglass/]\nby Amber Roth [https://news.sap.com/author/amberroth/]\nFebruary 19, 2025",
+      ];
+
+      function processNewsArray(newsArray) {
+        return newsArray
+          .map((news) => {
+            // Regex para extrair título, imagem, link, autor e data
+            const titleRegex = /^(.+?)\n/;
+            const imageRegex = /\[https:\/\/.*?\.(jpg|png|jpeg)\]/;
+            const linkRegex = /\n(https:\/\/news\.sap\.com\/[^\s]+)/;
+            const authorRegex = /by (.+?) \[/;
+            const dateRegex = /\n(\w+ \d{1,2}, \d{4})/;
+
+            // Extraindo os dados usando regex
+            const titleMatch = news.match(titleRegex);
+            const imageMatch = news.match(imageRegex);
+            const linkMatch = news.match(linkRegex);
+            const authorMatch = news.match(authorRegex);
+            const dateMatch = news.match(dateRegex);
+
+            // Formatando os dados corretamente
+            const title = titleMatch ? titleMatch[1].trim() : "Sem título";
+            const image = imageMatch
+              ? imageMatch[0].replace(/\[|\]/g, "")
+              : "https://via.placeholder.com/540x310";
+            const link = linkMatch ? linkMatch[1] : "#";
+            const author = authorMatch ? authorMatch[1].trim() : "Desconhecido";
+            const date = dateMatch ? dateMatch[1] : "Data não disponível";
+
+            // Criando o HTML do card
+            return `
+                    <div class="news-card">
+                        <img src="${image}" alt="Imagem da notícia"/>
+                        <h3><a href="${link}" target="_blank">${title}</a></h3>
+                        <p>Por <strong>${author}</strong></p>
+                        <p class="date">📅 ${date}</p>
+                        <a href="${link}" class="read-more" target="_blank">Ler Mais</a>
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      // Inserindo os cards na div "news-container"
+      document.getElementById("news-container").innerHTML =
+        processNewsArray(newsArray);
+    </script>
+  </body>
+</html>
